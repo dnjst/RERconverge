@@ -1627,12 +1627,12 @@ coreGetResiduals=function(treesObj, nvMod=NULL, n.pcs=0, cutoff=NULL,
       #get the ith tree
       tree1=treesObj$trees[[i]]
 
-      #get the common species, prune and unroot
+      # Align rooting and node numbering with the master
       both=intersect(tree1$tip.label, cm)
       if(length(both)<min.sp){
         next
       }
-      tree1=unroot(pruneTree(tree1,both))
+      tree1=prepareTreeForTT(pruneTree(tree1,both), treesObj$masterTree)
 
 
       #find all the genes that that whose maximal species set is the same as tree1
